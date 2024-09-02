@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SignupService {
 
     private final UserRepository userRepository;
 
-    @Transactional(readOnly = true)
     public void signup(SignUpRequest request) {
 
         if(userRepository.existsByAccountId(request.getAccountId())) throw AlreadyUserException.EXCEPTION;

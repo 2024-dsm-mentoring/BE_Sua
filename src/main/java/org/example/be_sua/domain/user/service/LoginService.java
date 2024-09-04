@@ -1,6 +1,5 @@
 package org.example.be_sua.domain.user.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.be_sua.domain.auth.exception.PasswordMisMatchException;
 import org.example.be_sua.domain.auth.presentation.response.TokenResponse;
@@ -11,17 +10,18 @@ import org.example.be_sua.domain.user.presentation.dto.request.LoginRequest;
 import org.example.be_sua.global.security.jwt.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class LoginService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @Transactional
-    public TokenResponse signIn(LoginRequest request) {
+    public TokenResponse login(LoginRequest request) {
         User user = userRepository.findByAccountId(request.getAccountId())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 

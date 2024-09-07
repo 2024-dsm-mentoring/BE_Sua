@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+// Spring Security가 사용자 인증 및 권한을 처리할 수 있게 함
+// 계정의 만료, 잠금, 활성화 여부와 같은 정보를 통해 사용자의 상태를 관리
+
 @Getter
 @RequiredArgsConstructor
 public class AuthDetails implements UserDetails {
@@ -17,12 +20,11 @@ public class AuthDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    } //사용자에게 부여된 권환 반환
-
+    } // 사용자의 권한을 반환하는 메서드
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassword();
     } //사용자 인증 암호 반환
 
 
@@ -40,7 +42,7 @@ public class AuthDetails implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         return true;
-    } //사용자 잠금 여부
+    } //사용자 계정 잠금 여부
 
     @Override
     public boolean isCredentialsNonExpired() {

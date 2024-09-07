@@ -18,12 +18,12 @@ public class UserController {
     private final SignupService signupService;
     private final LoginService loginService;
 
-    @PostMapping("/signup")
+    @PostMapping("/signup") // 회원가입
     public void signup(@RequestBody @Valid SignUpRequest signUpRequest) {
         signupService.signup(signUpRequest);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/longin") // 로그인
     public void login(@RequestBody @Valid LoginRequest loginRequest) {
         loginService.login(loginRequest);
     }

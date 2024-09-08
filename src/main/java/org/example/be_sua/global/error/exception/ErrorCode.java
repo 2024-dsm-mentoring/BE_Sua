@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+// CrudException이 발생했을때 상태코드와 메시지 반환
 public enum ErrorCode {
     //server
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),

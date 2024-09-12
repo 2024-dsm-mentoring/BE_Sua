@@ -5,6 +5,7 @@ import org.example.be_sua.domain.user.domain.repository.UserRepository;
 import org.example.be_sua.domain.user.exception.AlreadyUserException;
 import org.example.be_sua.domain.user.presentation.dto.request.SignUpRequest;
 import org.example.be_sua.domain.user.domain.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SignupService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void signup(SignUpRequest request) {
 
@@ -22,7 +24,7 @@ public class SignupService {
         User user = userRepository.save(User.builder()
                 .email(request.getEmail())
                 .accountId(request.getAccountId())
-                .password((request.getPassword()))
+                .password(passwordEncoder.encode(request.getPassword()))
                 .build());
     }
 }

@@ -1,24 +1,29 @@
 package org.example.be_sua.domain.auth.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
+import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "tbl_refresh_token")
-@Entity
+@RedisHash
 public class RefreshToken {
 
     @Id
     private String accountId;
 
+    @Indexed
     private String refreshToken;
 
-    public void update(String refreshToken) {
+    @TimeToLive
+    private Long ttl;
+
+    public void updateToken(String refreshToken, Long ttl) {
         this.refreshToken = refreshToken;
+        this.ttl = ttl;
     }
 }

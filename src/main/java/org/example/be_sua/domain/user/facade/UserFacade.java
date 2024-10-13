@@ -12,6 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Component
 public class UserFacade {
+
     private final UserRepository userRepository;
 
     public User getUserByAccountId(String accountId) {

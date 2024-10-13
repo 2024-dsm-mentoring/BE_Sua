@@ -46,9 +46,8 @@ public class SecurityConfig {
                .authorizeHttpRequests(auth ->
                        auth
                                //특정 경로에 대해 인증 없이 접근을 허용
-                               .requestMatchers("/users/signup", "/users/login").permitAll()
+                               .requestMatchers("/users/signup", "/users/login", "/users/token").permitAll()
                                //USER 권한이 있는 사용자만 접근 가능
-                               .requestMatchers("/users/haha").hasRole("USER")
                                //그 외의 모든 요청은 인증이 필요함
                                .anyRequest().authenticated()
                )
